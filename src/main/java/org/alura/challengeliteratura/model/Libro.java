@@ -1,4 +1,5 @@
 package org.alura.challengeliteratura.model;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -15,7 +16,7 @@ public class Libro {
     private String idioma;
     private Integer descargas;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JoinColumn(name = "autor_id")
     private Autor autor;
 
