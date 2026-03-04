@@ -1,9 +1,9 @@
 spring.application.name=challenge-literatura
 
 # PostgreSQL
-spring.datasource.url=jdbc:postgresql://localhost:5432/literatura_db
+spring.datasource.url=jdbc:postgresql://localhost:5432/literatura
 spring.datasource.username=postgres
-spring.datasource.password=postgres
+spring.datasource.password=145090
 spring.datasource.driver-class-name=org.postgresql.Driver
 
 # JPA / Hibernate

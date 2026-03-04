@@ -1,5 +1,4 @@
 package org.alura.challengeliteratura.model;
-
 import jakarta.persistence.*;
 
 @Entity
