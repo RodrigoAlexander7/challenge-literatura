@@ -10,8 +10,10 @@ import org.alura.challengeliteratura.repository.AutorRepository;
 import org.alura.challengeliteratura.repository.LibroRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalDouble;
 
 @Service
 public class LiteraturaService {
@@ -62,6 +64,33 @@ public class LiteraturaService {
 
     public List<Autor> listarAutoresVivosEnAnio(int anio) {
         return autorRepository.findAutoresVivosEnAnio(anio);
+    }
+
+    public void estadisticasPorIdioma(String idioma) {
+        List<Libro> libros = libroRepository.findByIdioma(idioma);
+
+        long total = libros.size();
+
+        if (total == 0) {
+            System.out.println("[INFO] No hay libros registrados en el idioma: " + idioma);
+            return;
+        }
+
+        OptionalDouble promDescargas = libros.stream()
+                .mapToInt(l -> l.getDescargas() != null ? l.getDescargas() : 0)
+                .average();
+
+        Libro masDescargado = libros.stream()
+                .max(Comparator.comparingInt(l -> l.getDescargas() != null ? l.getDescargas() : 0))
+                .orElse(null);
+
+        System.out.println("\n--- Estadísticas para idioma: [" + idioma + "] ---");
+        System.out.println("  Total de libros       : " + total);
+        System.out.printf( "  Promedio de descargas : %.0f%n", promDescargas.orElse(0));
+        if (masDescargado != null) {
+            System.out.println("  Libro más descargado  : " + masDescargado.getTitulo()
+                    + " (" + masDescargado.getDescargas() + " descargas)");
+        }
     }
 
     // --- Helpers ---

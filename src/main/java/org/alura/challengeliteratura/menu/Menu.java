@@ -38,6 +38,7 @@ public class Menu {
         System.out.println("2 - Listar libros registrados");
         System.out.println("3 - Listar autores registrados");
         System.out.println("4 - Listar autores vivos en un año");
+        System.out.println("5 - Estadísticas de libros por idioma");
         System.out.println("0 - Salir");
         System.out.print("Opción: ");
     }
@@ -48,6 +49,7 @@ public class Menu {
             case 2 -> listarLibros();
             case 3 -> listarAutores();
             case 4 -> listarAutoresVivos();
+            case 5 -> estadisticasPorIdioma();
             case 0 -> {} // salir
             default -> System.out.println("[WARN] Opción inválida, intenta de nuevo.");
         }
@@ -97,6 +99,24 @@ public class Menu {
         } catch (NumberFormatException e) {
             System.out.println("[WARN] Año inválido.");
         }
+    }
+
+    private void estadisticasPorIdioma() {
+        System.out.println("\n--- Selecciona un idioma ---");
+        System.out.println("  es - Español");
+        System.out.println("  en - Inglés");
+        System.out.println("  fr - Francés");
+        System.out.println("  pt - Portugués");
+        System.out.print("Idioma: ");
+        String idioma = scanner.nextLine().trim().toLowerCase();
+
+        List<String> idiomasValidos = List.of("es", "en", "fr", "pt");
+        if (!idiomasValidos.contains(idioma)) {
+            System.out.println("[WARN] Idioma no reconocido. Opciones válidas: es, en, fr, pt");
+            return;
+        }
+
+        literaturaService.estadisticasPorIdioma(idioma);
     }
 }
 
