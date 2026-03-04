@@ -17,7 +17,7 @@ public class Libro {
     private Integer descargas;
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-    @JoinColumn(name = "autor_id")
+    @JoinColumn(name = "autor_id") // create an FK column named "autor_id"
     private Autor autor;
 
     public Libro() {}
